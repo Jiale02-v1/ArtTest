@@ -1,0 +1,106 @@
+body {
+  font-family: '標楷體', 'Noto Sans TC', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+}
+
+.container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 90%;
+  margin-top: 2rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#card {
+  margin-bottom: 1.5rem;
+}
+
+#question {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+#choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.choice {
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.choice:hover:not(:disabled) {
+  background-color: #d5d5d5;
+}
+
+.choice.correct {
+  background-color: #c8f7c5;
+  color: #27632a;
+  font-weight: bold;
+}
+
+.choice.incorrect {
+  background-color: #ffd6d6;
+  color: #a33a3a;
+  font-weight: bold;
+}
+
+button#nextBtn {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button#nextBtn:hover {
+  background-color: #357ab8;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #question {
+    font-size: 1rem;
+  }
+
+  .choice {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  button#nextBtn {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+}
