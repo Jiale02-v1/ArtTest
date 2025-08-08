@@ -6,7 +6,7 @@ let questions = [];
 let currentQuestionIndex = -1;
 
 // 載入題庫
-fetch("data/questions.txt")
+fetch("data/questions2.txt")
   .then(res => res.text())
   .then(text => {
     console.log("Raw text loaded:", text.substring(0, 200) + "...");
