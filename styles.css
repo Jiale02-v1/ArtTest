@@ -85,6 +85,17 @@ button#nextBtn:hover {
   background-color: #357ab8;
 }
 
+#progress {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
 @media (max-width: 480px) {
   h1 {
     font-size: 1.5rem;
