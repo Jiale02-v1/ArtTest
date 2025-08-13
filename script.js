@@ -1,32 +1,53 @@
 const questionEl = document.getElementById("question");
 const choicesEl = document.getElementById("choices");
 const nextBtn = document.getElementById("nextBtn");
+const fileSelector = document.getElementById("fileSelector");
+const quizSection = document.getElementById("quizSection");
+const selectQuestions1Btn = document.getElementById("selectQuestions1");
+const selectQuestions2Btn = document.getElementById("selectQuestions2");
 
 let questions = [];
 let currentQuestionIndex = -1;
 let questionStats = {}; // Track correct answers for each question
+let currentFile = "";
+
+// File selection event listeners
+selectQuestions1Btn.addEventListener("click", () => loadQuestions("data/questions.txt"));
+selectQuestions2Btn.addEventListener("click", () => loadQuestions("data/questions2.txt"));
 
 // 載入題庫
-fetch("data/questions2.txt")
-  .then(res => res.text())
-  .then(text => {
-    console.log("Raw text loaded:", text.substring(0, 200) + "...");
-    const result = parseQuestions(text);
-    questions = result.questions;
-    
-    // Update the title
-    if (result.title) {
-      document.querySelector('h1').textContent = result.title;
-      document.title = result.title;
-    }
-    
-    console.log("Questions array:", questions);
-    showNextQuestion();
-  })
-  .catch(err => {
-    questionEl.textContent = "無法載入題目資料。";
-    console.error("Error loading questions:", err);
-  });
+function loadQuestions(filename) {
+  currentFile = filename;
+  
+  // Hide file selector and show quiz section
+  fileSelector.style.display = "none";
+  quizSection.style.display = "block";
+  
+  // Reset question stats
+  questionStats = {};
+  currentQuestionIndex = -1;
+  
+  fetch(filename)
+    .then(res => res.text())
+    .then(text => {
+      console.log("Raw text loaded:", text.substring(0, 200) + "...");
+      const result = parseQuestions(text);
+      questions = result.questions;
+      
+      // Update the title
+      if (result.title) {
+        document.querySelector('h1').textContent = result.title;
+        document.title = result.title;
+      }
+      
+      console.log("Questions array:", questions);
+      showNextQuestion();
+    })
+    .catch(err => {
+      questionEl.textContent = "無法載入題目資料。";
+      console.error("Error loading questions:", err);
+    });
+}
 
 // 解析題庫格式
 function parseQuestions(text) {

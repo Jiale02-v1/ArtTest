@@ -26,6 +26,47 @@ h1 {
   text-align: center;
 }
 
+#fileSelector {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#fileSelector h2 {
+  font-size: 1.4rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.file-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.file-btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.file-btn:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.file-btn:active {
+  transform: translateY(0);
+}
+
 #card {
   margin-bottom: 1.5rem;
 }
@@ -99,6 +140,19 @@ button#nextBtn:hover {
 @media (max-width: 480px) {
   h1 {
     font-size: 1.5rem;
+  }
+
+  #fileSelector h2 {
+    font-size: 1.2rem;
+  }
+
+  .file-options {
+    max-width: 100%;
+  }
+
+  .file-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
   }
 
   #question {

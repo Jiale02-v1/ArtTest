@@ -9,11 +9,22 @@
 <body>
   <div class="container">
     <h1>園藝 丙級 複習卡片系統</h1>
-    <div id="card">
-      <div id="question">載入中...</div>
-      <div id="choices"></div>
+    
+    <div id="fileSelector">
+      <h2>選擇題庫</h2>
+      <div class="file-options">
+        <button id="selectQuestions1" class="file-btn">01：園藝作物、資材及機具識别</button>
+        <button id="selectQuestions2" class="file-btn">02：園藝作物栽培環境</button>
+      </div>
     </div>
-    <button id="nextBtn">下一題</button>
+    
+    <div id="quizSection" style="display: none;">
+      <div id="card">
+        <div id="question">載入中...</div>
+        <div id="choices"></div>
+      </div>
+      <button id="nextBtn">下一題</button>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
