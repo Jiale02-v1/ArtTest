@@ -5,6 +5,10 @@ const fileSelector = document.getElementById("fileSelector");
 const quizSection = document.getElementById("quizSection");
 const selectQuestions1Btn = document.getElementById("selectQuestions1");
 const selectQuestions2Btn = document.getElementById("selectQuestions2");
+const selectQuestions3Btn = document.getElementById("selectQuestions3");
+const selectQuestions4Btn = document.getElementById("selectQuestions4");
+const selectQuestions5Btn = document.getElementById("selectQuestions5");
+const selectQuestions6Btn = document.getElementById("selectQuestions6");
 
 let questions = [];
 let currentQuestionIndex = -1;
@@ -13,7 +17,11 @@ let currentFile = "";
 
 // File selection event listeners
 selectQuestions1Btn.addEventListener("click", () => loadQuestions("data/questions.txt"));
-selectQuestions2Btn.addEventListener("click", () => loadQuestions("data/questions2.txt"));
+selectQuestions2Btn.addEventListener("click", () => loadQuestions("data/questions21.txt"));
+selectQuestions3Btn.addEventListener("click", () => loadQuestions("data/questions22.txt"));
+selectQuestions4Btn.addEventListener("click", () => loadQuestions("data/questions23.txt"));
+selectQuestions5Btn.addEventListener("click", () => loadQuestions("data/questions24.txt"));
+selectQuestions6Btn.addEventListener("click", () => loadQuestions("data/questions2.txt"));
 
 // 載入題庫
 function loadQuestions(filename) {
