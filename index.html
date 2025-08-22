@@ -1,35 +1,197 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>園藝 丙級 複習卡片系統</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Mode - Question Practice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .study-config {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .config-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .config-row label {
+            min-width: 120px;
+        }
+
+        select, input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #startBtn {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #startBtn:hover {
+            background-color: #218838;
+        }
+
+        .study-area {
+            display: none;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .choice {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .choice:hover {
+            background-color: #f8f9fa;
+        }
+
+        .choice.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .choice.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .progress {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        #categorySelect {
+            display: none;
+        }
+
+        #dateInput {
+            display: none;
+        }
+
+        .stats {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .session-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        #nextQuestionBtn {
+            display: none;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #nextQuestionBtn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>園藝 丙級 複習卡片系統</h1>
-    
-    <div id="fileSelector">
-      <h2>選擇題庫</h2>
-      <div class="file-options">
-        <button id="selectQuestions1" class="file-btn">01：園藝作物、資材及機具識别</button>
-        <button id="selectQuestions2" class="file-btn">02（第1部分）：園藝作物栽培環境</button>
-        <button id="selectQuestions3" class="file-btn">02（第2部分）：園藝作物栽培環境</button>
-        <button id="selectQuestions4" class="file-btn">02（第3部分）：園藝作物栽培環境</button>
-        <button id="selectQuestions5" class="file-btn">02（第4部分）：園藝作物栽培環境</button>
-        <button id="selectQuestions6" class="file-btn">02：園藝作物栽培環境</button>
-      </div>
+    <div class="container">
+        <h1>题目练习</h1>
+        
+        <div class="study-config">
+            <div class="config-row">
+                <label>学习模式：</label>
+                <select id="modeSelect">
+                    <option value="random">随机模式</option>
+                    <option value="category">部分模式</option>
+                    <option value="date">日期模式</option>
+                </select>
+            </div>
+
+            <div class="config-row">
+                <label>每题答对次数：</label>
+                <input type="number" id="requiredCorrect" min="1" value="3">
+            </div>
+
+            <div class="config-row" id="categorySelect">
+                <label>选择项目：</label>
+                <select id="categoryDropdown"></select>
+            </div>
+
+            <div class="config-row" id="dateInput">
+                <label>学习日期：</label>
+                <input type="text" id="studyDate" placeholder="DD/MM/YYYY">
+            </div>
+
+            <button id="startBtn">开始学习</button>
+        </div>
+
+        <div class="study-area">
+            <div class="question" id="questionText"></div>
+            <div class="choices" id="choicesArea"></div>
+            <div class="stats">
+                <div>已完成题目：<span id="completedCount">0</span> / <span id="totalCount">0</span></div>
+                <div>当前题目答对次数：<span id="currentCorrectCount">0</span> / <span id="requiredCorrectDisplay">3</span></div>
+            </div>
+            <button id="nextQuestionBtn">下一题</button>
+        </div>
     </div>
-    
-    <div id="quizSection" style="display: none;">
-      <div id="card">
-        <div id="question">載入中...</div>
-        <div id="choices"></div>
-      </div>
-      <button id="nextBtn">下一題</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script type="module" src="studyScript.js"></script>
 </body>
 </html>
