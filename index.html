@@ -32,27 +32,10 @@
             gap: 20px;
             margin-bottom: 15px;
             align-items: center;
-            flex-wrap: wrap;
         }
 
         .config-row label {
             min-width: 120px;
-            width: 100%;
-        }
-
-        @media (max-width: 480px) {
-            .config-row {
-                gap: 10px;
-            }
-            
-            .config-row label {
-                margin-bottom: 5px;
-            }
-
-            .config-row input,
-            .config-row select {
-                width: 100%;
-            }
         }
 
         select, input {
@@ -177,10 +160,11 @@
                     <option value="random">随机模式</option>
                     <option value="category">部分模式</option>
                     <option value="date">日期模式</option>
+                    <option value="exam">考试模式</option>
                 </select>
             </div>
 
-            <div class="config-row">
+            <div class="config-row" id="requiredCorrectRow">
                 <label>每题答对次数：</label>
                 <input type="number" id="requiredCorrect" min="1" value="3">
             </div>
